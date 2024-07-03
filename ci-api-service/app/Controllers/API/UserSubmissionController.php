@@ -225,6 +225,19 @@ class UserSubmissionController extends BaseController
                 'email' => $input['email'],
                 'password' => $input['password'],
             ]);
+
+            // $client = \Config\Services::curlrequest();
+
+            // $response = $client->post('http://localhost:8081/api/login', [
+            //     'headers' => [
+            //         'Content-Type' => 'application/json',
+            //         'X-Requested-With' => 'XMLHttpRequest'
+            //     ],
+            //     'json' => $input
+            // ]);
+
+            // $data = json_decode($response->getBody());
+
             session()->set('token', $data['data']['access_token']);
             $profData = $this->authService->MeMicroService([
                 'token' => session()->get('token')

@@ -50,8 +50,11 @@ class AuthService
 
     public function LoginMicroService($data)
     {
-        $response = $this->client->post("{$this->baseUrl}/login", [
-            'json' => $data
+        // $response = $this->client->post("{$this->baseUrl}/login", [
+        //     ['headers' => ['Content-Type' => 'application/json', 'X-Requested-With' => 'XMLHttpRequest'], 'json' => $data]
+        // ]);
+        $response = $this->client->request("POST", "{$this->baseUrl}/login", [
+            'headers' => ['Content-Type' => 'application/json', 'X-Requested-With' => 'XMLHttpRequest'], 'json' => $data
         ]);
 
         if ($response->getStatusCode() == 200 || $response->getStatusCode() == 201) {
