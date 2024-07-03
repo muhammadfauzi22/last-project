@@ -221,11 +221,11 @@ class UserSubmissionController extends BaseController
         try {
             $input = $this->request->getJSON(true);
 
-            $data = $this->authService->LoginMicroService([
-                'email' => $input['email'],
-                'password' => $input['password'],
-            ]);
-            session()->set('token', $data['data']['access_token']);
+            // $data = $this->authService->LoginMicroService([
+            //     'email' => $input['email'],
+            //     'password' => $input['password'],
+            // ]);
+            session()->set('token', $input['token']);
             $profData = $this->authService->MeMicroService([
                 'token' => session()->get('token')
             ]);
@@ -264,7 +264,7 @@ class UserSubmissionController extends BaseController
             session()->set('isLoggedIn', true);
             session()->set('permissions', $permissionData);
             session()->set('active_group', $tempG[0]);
-            return $this->response->setJSON($data)->setStatusCode(201);
+            return $this->response->setJSON($profData)->setStatusCode(201);
         } catch (\Exception $e) {
             $this->logger->error("Error from Auth Service | " . $e->getMessage());
 

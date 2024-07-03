@@ -114,29 +114,48 @@
                 }
             })
             $.ajax({
-                url: '/api/login',
+                url: 'http://localhost:8081/api/login',
                 type: 'POST',
-                contentType: 'application/json',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-requested-With': 'XMLHttpRequest'
+                },
                 data: JSON.stringify({
                     email: $('#email').val(),
                     password: $('#password').val()
                 }),
                 success: function(response) {
-                    Swal.fire(
-                        'Login Berhasil!',
-                        '',
-                        'success'
-                    ).then(() => {
-                        window.location.href = '/dashboard';
+                    $.ajax({
+                        url: '/api/login',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            token: response.data.access_token
+                        }),
+                        success: function(response) {
+                            Swal.fire(
+                                'Login Berhasil!',
+                                '',
+                                'success'
+                            ).then(() => {
+                                window.location.href = '/dashboard';
+                            });
+                        },
+                        error: function(xhr) {
+                            Swal.fire(
+                                'Login Gagal2!',
+                                xhr.responseText,
+                                'error'
+                            );
+                        }
                     });
                 },
                 error: function(xhr) {
                     Swal.fire(
-                        'Login Gagal!',
-                        xhr.responseText,
+                        'Login Gagal1!',
+                        'Description:' + xhr.responseText,
                         'error'
                     );
-                    // alert('Failed to login: ' + xhr.responseText);
                 }
             });
         });

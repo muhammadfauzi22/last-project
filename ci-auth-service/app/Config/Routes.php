@@ -24,6 +24,8 @@ service('auth')->routes($routes);
 $routes->group('api', ['namespace' => 'App\Controllers\API'], static function ($routes) {
     $routes->post('register', 'AuthController::register');
     $routes->post('login', 'AuthController::login');
+    // $routes->post('login', ['AuthController::login', 'cors']);
+    // $routes->options('login', ['AuthController::login', 'cors']);
     $routes->post('loginForm', 'AuthController::loginForm');
     $routes->resource('user', ['controller' => 'AuthController']);
     $routes->get('user/(:segment)', 'UserSubmissionController::getUser/$1');
