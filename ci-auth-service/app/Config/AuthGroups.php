@@ -107,7 +107,7 @@ class AuthGroups extends ShieldAuthGroups
         'hrd.manage-users'    => 'Can manage all users',
         'hrd.approve-2'       => 'Can approve submission in second cycle',
         'hrd.reject-2'        => 'Can reject submission in second cycle',
-        'hrd.revision-2'      => 'Can propose revision in second cycle',
+        'hrd.revise-2'        => 'Can propose revision in second cycle',
         'pengesah.finalize'   => 'Can finalize submission',
         'beta.access'         => 'Can access beta-level features',
     ];

@@ -255,7 +255,7 @@ class UserSubmissionController extends BaseController
                 'hrd.manage-users',
                 'hrd.approve-2',
                 'hrd.reject-2',
-                'hrd.revision-2',
+                'hrd.revise-2',
                 'pengesah.finalize'
             ] as $permission) {
                 if ($this->authService->getCheckPermissionMicroService(['token' => session()->get('token'), 'permission' => $permission])['data']['isallowed']) {
