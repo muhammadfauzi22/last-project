@@ -6,7 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->get('tes', 'API\SubmissionController::tes');
+$routes->get('test', 'Home::test');
 $routes->group('api', ['namespace' => 'App\Controllers\API'], static function ($routes) {
     $routes->get('user/(:segment)', 'UserSubmissionController::getUser/$1');
     $routes->get('test', 'UserSubmissionController::getTest');

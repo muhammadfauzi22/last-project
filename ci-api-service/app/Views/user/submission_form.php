@@ -1,4 +1,4 @@
-<?= $this->extend('layout\page_layout') ?>
+<?= $this->extend('layout\coreframe') ?>
 
 <?= $this->section('title') ?>
 Pengajuan Faktur
@@ -60,6 +60,14 @@ Pengajuan Faktur
         flex: 1;
     }
 
+    .item .field {
+        flex: 1;
+    }
+
+    .item .field input {
+        width: 100%;
+    }
+
     .actions {
         display: flex;
         justify-content: space-between;
@@ -92,6 +100,14 @@ Pengajuan Faktur
 
     .btn-submit:hover {
         background-color: #45A049;
+    }
+
+
+    .card {
+        width: 50%;
+        margin: 0 auto;
+        border-radius: 8px;
+        overflow: hidden;
     }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -162,41 +178,103 @@ Pengajuan Faktur
     }
 </script>
 
-<div class="header">
-    <h1>Invoice Submission</h1>
-</div>
 <form id="invoice-form" onsubmit="submitForm(event)">
-    <div class="form-group">
-        <label for="invoice_name">Invoice Name:</label>
-        <input type="text" id="invoice_name" name="invoice_name" required>
-    </div>
-    <div class="form-group">
-        <label for="year">Year:</label>
-        <input type="number" id="year" name="year" required>
-    </div>
-    <div class="form-group">
-        <label for="semester">Semester:</label>
-        <select id="semester" name="semester" required>
-            <option value="1">1</option>
-            <option value="2">2</option>
-        </select>
-    </div>
-    <?php /*
-    <div class="form-group">
-        <label for="file">Upload File:</label>
-        <input type="file" id="file" name="file" required>
-    </div>
-    */ ?>
-    <div class="items" id="items-container">
-        <div class="item">
-            <input type="text" name="item_name" placeholder="Item Name" required>
-            <input type="number" name="item_quantity" placeholder="Quantity" required>
-            <input type="number" name="item_price" placeholder="Price" step="0.01" required>
+    <div class="card">
+        <header class="card-header has-background-info">
+            <h1 class="card-header-title has-text">Pengajuan Faktur</h1>
+        </header>
+        <div class="card-content">
+            <div class="field">
+                <label class="label">Nama Faktur</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input id="invoice_name" name="invoice_name" class="input is-success" type="text" placeholder="Nama" required>
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-font"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Tahun</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left">
+                            <input class="input is-success" id="year" name="year" type="number" placeholder="Tahun">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-calendar"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field-label is-normal">
+                        <label class="label">Semester</label>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <div class="select">
+                                <select id="semester" name="semester" required>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="actions">
-        <button type="button" class="btn-add-item" onclick="addItem()">Add Item</button>
-        <button type="submit" class="btn-submit">Submit Invoice</button>
+
+    <div class="card" style="width: 75%;">
+        <header class="card-header has-background-info">
+            <h3 class="card-header-title has-text">Detail Barang</h3>
+        </header>
+        <div class="card-content">
+            <div class="items" id="items-container">
+                <div class="item">
+                    <div class="field">
+                        <div class="control has-icons-left has-icons-right">
+                            <input type="text" name="item_name" placeholder="Nama Barang" class="input is-success" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-gift"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control has-icons-left has-icons-right">
+                            <input type="number" name="item_quantity" placeholder="Jumlah" class="input is-success" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-hashtag"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control has-icons-left has-icons-right">
+                            <input type="number" name="item_price" placeholder="Harga" class="input is-success" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="field">
+                    <div class="control">
+                        <button type="button" class="button has-background-light" onclick="addItem()">Add Item</button>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-info">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </form>
 

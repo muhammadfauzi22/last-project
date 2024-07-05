@@ -13,4 +13,9 @@ class Home extends BaseController
     {
         return view('user\login');
     }
+
+    public function test()
+    {
+        return view('test_page');
+    }
 }

@@ -1,124 +1,160 @@
-<?= $this->extend('layout\page_layout') ?>
+<?= $this->extend('layout\coreframe') ?>
 
 <?= $this->section('title') ?>
 Dashboard
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <style>
-    .container {
-        margin-top: 50px;
-    }
-
     .card {
-        border-radius: 15px;
+        width: 75%;
+        /* Adjusted the width for a better fit */
+        margin: 0 auto;
+        border-radius: 8px;
+        overflow: hidden;
     }
 
-    .card-header {
-        background-color: #007bff;
-        color: white;
-        border-radius: 15px 15px 0 0;
+    .card .card-content {
+        padding: 20px;
     }
 
-    .btn-custom {
-        background-color: #007bff;
-        color: white;
+    table {
+        width: 100%;
+        table-layout: fixed;
+        /* Ensures the table fits within the card */
     }
 
-    .btn-custom:hover {
-        background-color: #0056b3;
-    }
-
-    .table-container {
-        margin-top: 30px;
+    th,
+    td {
+        padding: 10px;
+        text-align: left;
+        word-wrap: break-word;
+        /* Allows content to wrap within cells */
     }
 </style>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h4>Manajemen Pengguna</h4>
+<div class="card">
+    <div class="card-header has-background-info">
+        <h3 class="card-header-title has-text">Manajemen Pengguna</h3>
+    </div>
+    <div class="card-content">
+        <form id="userForm" method="post" action="<?= base_url('user/add') ?>">
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Nama</label>
                 </div>
-                <div class="card-body">
-                    <form id="userForm" method="post" action="<?= base_url('user/add') ?>">
-                        <div class="form-group">
-                            <label for="name">Nama</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password Confirm</label>
-                            <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Enter password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="role">Role</label>
-                            <select class="form-control" id="role" name="role" required>
-                                <option value="">Select a role</option>
-                                <option value="pegawai">Pegawai</option>
-                                <option value="hrd">HRD</option>
-                                <option value="atasan">Atasan</option>
-                                <option value="pengesah">Pengesah</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-custom btn-block">Add User</button>
-                    </form>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left">
+                            <input class="input" type="text" id="name" name="name" placeholder="Nama" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-font"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left has-icons-right">
+                            <input class="input" type="email" id="email" name="email" placeholder="Email" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Role</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <div class="select is-rounded">
+                                <select id="role" name="role" required>
+                                    <option value="">Select a role</option>
+                                    <option value="pegawai">Pegawai</option>
+                                    <option value="hrd">HRD</option>
+                                    <option value="atasan">Atasan</option>
+                                    <option value="pengesah">Pengesah</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Password</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left">
+                            <input class="input" type="password" id="password" name="password" placeholder="Password" required>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left has-icons-right">
+                            <input class="input" type="password" id="password_confirm" name="password_confirm" placeholder="Konfirmasi password">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-unlock"></i>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="button is-info">Add User</button>
+        </form>
     </div>
 </div>
 
-<div class="row justify-content-center table-container">
-    <div class="col-md-10">
-        <div class="card">
-            <div class="card-header text-center">
-                <h4>Pengguna Eksisting</h4>
-            </div>
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (isset($users) && !empty($users)) : ?>
-                            <?php foreach ($users as $user) : ?>
-                                <tr>
-                                    <td><?= $user['username']; ?></td>
-                                    <td><?= $user['email']; ?></td>
-                                    <td><?= ucfirst($user['group']); ?></td>
-                                    <td>
-                                        <?php /* <a href="<?= base_url('user/edit/' . $user['id']); ?>" class="btn btn-sm btn-warning">Edit</a> */ ?>
-                                        <a data-userid="<?= $user['id']; ?>" class="btn btn-sm btn-danger delete-user">Delete</a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else : ?>
-                            <tr>
-                                <td colspan="4" class="text-center">No users found</td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+
+<div class="card">
+    <div class="card-header has-background-info">
+        <h3 class="card-header-title has-text">Pengguna Eksisting</h3>
     </div>
-</div>
+    <div class="card-content">
+        <table class="table is-striped is-narrow is-hoverable">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (isset($users) && !empty($users)) : ?>
+                    <?php foreach ($users as $user) : ?>
+                        <tr>
+                            <td><?= $user['username']; ?></td>
+                            <td><?= $user['email']; ?></td>
+                            <td><?= ucfirst($user['group']); ?></td>
+                            <td>
+                                <?php /* <a href="<?= base_url('user/edit/' . $user['id']); ?>" class="btn btn-sm btn-warning">Edit</a> */ ?>
+                                <a data-userid="<?= $user['id']; ?>" class="button is-danger has-text-light delete-user">Delete</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <tr>
+                        <td colspan="4" class="text-center">No users found</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -126,17 +162,17 @@ Dashboard
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function() {
-        Swal.fire({
-            title: 'Pengubahan Data Sedang Diproses.',
-            html: 'Mohon Tunggu. Jangan keluar dari halaman.',
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            allowEnterKey: false,
-            didOpen: () => {
-                Swal.showLoading()
-            }
-        })
         $('#userForm').on('submit', function(event) {
+            Swal.fire({
+                title: 'Pengubahan Data Sedang Diproses.',
+                html: 'Mohon Tunggu. Jangan keluar dari halaman.',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+            })
             event.preventDefault();
             $.ajax({
                 url: '/api/register',
@@ -170,17 +206,17 @@ Dashboard
     });
 
     $(document).ready(function() {
-        Swal.fire({
-            title: 'Pengubahan Data Sedang Diproses.',
-            html: 'Mohon Tunggu. Jangan keluar dari halaman.',
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            allowEnterKey: false,
-            didOpen: () => {
-                Swal.showLoading()
-            }
-        })
         $('.delete-user').click(function(e) {
+            Swal.fire({
+                title: 'Pengubahan Data Sedang Diproses.',
+                html: 'Mohon Tunggu. Jangan keluar dari halaman.',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+            })
             e.preventDefault();
             var userId = $(this).data('userid');
             $.ajax({
