@@ -82,7 +82,7 @@ Dashboard
                 <div class="detail-content"><?= $lastSessSubmission != null ? $lastSessSubmission[0]['name'] : ''; ?></div>
             </div>
             <div class="detail-row">
-                <div class="detail-title">Jumlah Barang:</div>
+                <div class="detail-title">Total Kuantitas:</div>
                 <div class="detail-content"><?= $lastSessSubmission != null ? $lastSessSubmission[0]['total_qty'] : ''; ?></div>
             </div>
             <div class="detail-row">

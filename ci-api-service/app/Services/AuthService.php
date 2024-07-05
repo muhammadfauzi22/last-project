@@ -56,6 +56,8 @@ class AuthService
 
         if ($response->getStatusCode() == 200 || $response->getStatusCode() == 201) {
             return json_decode($response->getBody(), true);
+        } elseif ($response->getStatusCode() == 401) {
+            return json_decode($response->getBody(), true);
         }
 
         throw new \Exception('Error while sending login data :' . $response->getStatusCode());

@@ -298,13 +298,21 @@
                     password: $('#password').val()
                 }),
                 success: function(response) {
-                    Swal.fire(
-                        'Login Berhasil!',
-                        '',
-                        'success'
-                    ).then(() => {
-                        window.location.href = '/dashboard';
-                    });
+                    if (typeof response.data.error !== 'undefined') {
+                        Swal.fire(
+                            'Login Gagal!',
+                            response.data.message,
+                            'error'
+                        );
+                    } else {
+                        Swal.fire(
+                            'Login Berhasil!',
+                            '',
+                            'success'
+                        ).then(() => {
+                            window.location.href = '/dashboard';
+                        });
+                    }
                 },
                 error: function(xhr) {
                     Swal.fire(
@@ -312,7 +320,6 @@
                         xhr.responseText,
                         'error'
                     );
-                    // alert('Failed to login: ' + xhr.responseText);
                 }
             });
         });
